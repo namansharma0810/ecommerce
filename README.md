@@ -1,8 +1,8 @@
 URL - https://ecommerce-tkxp.onrender.com/
 
-Tech Stack
 
-Frontend
+
+#Frontend
 
 HTML5
 
@@ -14,19 +14,19 @@ Bootstrap
 
 EJS
 
-Backend
+#Backend
 
 Node.js
 
 Express.js
 
-Database
+#Database
 
 MongoDB
 
 Mongoose
 
-Authentication & Security
+#Authentication & Security
 
 Passport.js
 
@@ -34,11 +34,11 @@ Express Session
 
 bcrypt
 
-Payment Gateway
+#Payment Gateway
 
 Cashfree Payment Gateway
 
-Deployment
+#Deployment
 
 Render
 
