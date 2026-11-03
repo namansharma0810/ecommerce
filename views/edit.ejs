@@ -1,0 +1,170 @@
+
+<%- layout("layout/boilerplate.ejs") %>
+
+
+
+<div class="edit-product-page">
+
+    <div class="edit-product-card">
+
+        <div class="mb-4">
+            <h1 class="edit-product-title">
+                <i class="bi bi-pencil-square text-success me-2"></i>
+                Edit Product
+            </h1>
+
+            <p class="edit-product-subtitle">
+                Update your product details below.
+            </p>
+        </div>
+
+        <form action="/products/<%= product._id %>?_method=put" method="post">
+
+            <div class="mb-3">
+                <label for="name" class="form-label">Product Name</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    value="<%= product.name %>"
+                    placeholder="Enter product name"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Product Image URL</label>
+                <input
+                    type="url"
+                    class="form-control"
+                    id="image"
+                    name="image"
+                    value="<%= product.image %>"
+                    placeholder="https://example.com/image.jpg"
+                    required
+                >
+                <div class="form-text">
+                    Enter a valid URL for your product image.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Product Price ($)</label>
+                <input
+                    type="number"
+                    class="form-control"
+                    id="price"
+                    name="price"
+                    value="<%= product.price %>"
+                    placeholder="Enter product price"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="desc" class="form-label">Product Description</label>
+                <textarea
+                    class="form-control"
+                    id="desc"
+                    name="desc"
+                    placeholder="Describe your product"
+                    required
+                ><%= product.desc %></textarea>
+            </div>
+
+            <div class="edit-product-actions">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle me-1"></i>
+                    Save Changes
+                </button>
+
+                <a href="/products/<%= product._id %>"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<style>
+    .edit-product-page {
+        min-height: 80vh;
+        padding: 45px 15px;
+        background: #f8f9fa;
+    }
+
+    .edit-product-card {
+        max-width: 650px;
+        margin: auto;
+        padding: 32px;
+        background: #fff;
+        border: 1px solid #e9ecef;
+        border-radius: 18px;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    .edit-product-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 8px;
+    }
+
+    .edit-product-subtitle {
+        color: #6c757d;
+        margin-bottom: 28px;
+    }
+
+    .edit-product-card .form-label {
+        font-weight: 600;
+        color: #343a40;
+        margin-bottom: 8px;
+    }
+
+    .edit-product-card .form-control {
+        padding: 11px 13px;
+        border-radius: 9px;
+        border-color: #dee2e6;
+    }
+
+    .edit-product-card .form-control:focus {
+        border-color: #198754;
+        box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.12);
+    }
+
+    .edit-product-card textarea {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    .edit-product-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 26px;
+    }
+
+    .edit-product-actions .btn {
+        padding: 11px 22px;
+        border-radius: 9px;
+        font-weight: 600;
+    }
+
+    @media (max-width: 576px) {
+        .edit-product-card {
+            padding: 22px 18px;
+        }
+
+        .edit-product-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+<%- include('./partials/footer.ejs') %>

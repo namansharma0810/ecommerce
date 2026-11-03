@@ -1,0 +1,47 @@
+<%- layout("layout/boilerplate.ejs") %>
+
+<div class="container py-5">
+    <div class="card border-0 shadow-sm rounded-4 mx-auto text-center p-4 p-md-5" style="max-width: 550px;">
+
+        <!-- Failure Icon -->
+        <div class="mb-3">
+            <div class="d-inline-flex align-items-center justify-content-center bg-danger bg-opacity-10 rounded-circle"
+                 style="width: 80px; height: 80px;">
+                <i class="fa-solid fa-xmark text-danger fs-1"></i>
+            </div>
+        </div>
+
+        <!-- Failure Message -->
+        <h2 class="fw-bold text-danger mb-2">Payment Failed!</h2>
+        <p class="text-muted mb-4">
+            Unfortunately, we couldn't complete your payment. Please try again.
+        </p>
+
+        <!-- Order Details -->
+        <div class="bg-light rounded-3 p-3 text-start mb-4">
+            <div class="d-flex justify-content-between mb-3">
+                <span class="text-muted">Order ID</span>
+                <strong><%= order.order_id %></strong>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <span class="text-muted">Order Status</span>
+                <span class="badge bg-danger"><%= order.order_status %></span>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <a href="/users/cart" class="btn btn-danger btn-lg rounded-pill w-100 mb-3">
+            <i class="fa-solid fa-rotate-right me-2"></i>
+            Try Again
+        </a>
+
+        <a href="/" class="btn btn-outline-secondary rounded-pill w-100">
+            Continue Shopping
+        </a>
+
+        <p class="text-muted small mt-3 mb-0">
+            If money was deducted from your account, please check your payment status before trying again.
+        </p>
+    </div>
+</div>

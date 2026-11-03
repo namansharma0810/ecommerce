@@ -1,0 +1,228 @@
+
+<%- layout("layout/boilerplate.ejs") %>
+
+<style>
+    .products-section {
+        padding: 35px 0 50px;
+    }
+
+    .products-heading {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 6px;
+    }
+
+    .products-subheading {
+        color: #6c757d;
+        margin-bottom: 28px;
+    }
+
+    .product-card {
+        border: 1px solid #e9ecef;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+        height: 100%;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.09);
+    }
+
+    .product-image-wrapper {
+        height: 210px;
+        background: #f8f9fa;
+        overflow: hidden;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.04);
+    }
+
+    .product-card .card-body {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-name {
+        font-size: 1.1rem;
+        font-weight: 650;
+        margin-bottom: 8px;
+        color: #212529;
+    }
+
+    .product-price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #198754;
+        margin-bottom: 10px;
+    }
+
+    .product-description {
+        color: #6c757d;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 18px;
+        flex-grow: 1;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .product-actions .btn {
+        border-radius: 8px;
+        font-size: 0.9rem;
+    }
+
+    .add-cart-btn {
+        flex: 1;
+        min-width: 120px;
+    }
+
+    .seller-actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .seller-actions .btn {
+        flex: 1;
+    }
+
+    @media (max-width: 576px) {
+        .products-heading {
+            font-size: 1.65rem;
+        }
+
+        .product-image-wrapper {
+            height: 190px;
+        }
+    }
+</style>
+
+<div class="container products-section">
+
+    
+
+    <div class="row g-4">
+
+        <% for(let product of productsData) { %>
+
+            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+
+                <div class="card product-card">
+
+                    <div class="product-image-wrapper">
+                        <img
+                            src="<%= product.image %>"
+                            class="product-image"
+                            alt="<%= product.name %>"
+                            loading="lazy"
+                        >
+                    </div>
+
+                    <div class="card-body">
+
+                        <h5 class="product-name">
+                            <%= product.name %>
+                        </h5>
+                        
+
+                        <div class="product-price">
+                            $<%= product.price %>
+                        </div>
+
+                        <p class="product-description">
+                            <%= product.desc %>
+                        </p>
+
+                        <div class="product-actions">
+
+                            <a
+                                href="/products/<%= product._id %>"
+                                class="btn btn-outline-primary"
+                            >
+                                View Details
+                            </a>
+
+                            <form
+                                action="/cart/add/<%= product._id %>"
+                                method="post"
+                                class="add-cart-btn"
+                            >
+                                <button
+                                    type="submit"
+                                    class="btn btn-success w-100"
+                                >
+                                    <i class="bi bi-cart-plus me-1"></i>
+                                    Add to Cart
+                                </button>
+                            </form>
+
+                        </div>
+
+                        <% if(currUser && currUser.role === "seller") { %>
+
+                            <div class="seller-actions">
+
+                                <a
+                                    href="/products/<%= product._id %>/edit"
+                                    class="btn btn-sm btn-outline-secondary"
+                                >
+                                    <i class="bi bi-pencil me-1"></i>
+                                    Edit
+                                </a>
+
+                                <form
+                                    action="/products/<%= product._id %>?_method=delete"
+                                    method="post"
+                                    class="flex-fill"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-outline-danger w-100"
+                                    >
+                                        <i class="bi bi-trash me-1"></i>
+                                        Delete
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        <% } %>
+
+                    </div>
+                </div>
+
+            </div>
+
+        <% } %>
+
+    </div>
+
+    <% if(productsData.length === 0) { %>
+        <div class="text-center py-5">
+            <h4>No products available yet.</h4>
+            <p class="text-muted">
+                Please check back later.
+            </p>
+        </div>
+    <% } %>
+
+</div>
+
+<%- include('./partials/footer.ejs') %>

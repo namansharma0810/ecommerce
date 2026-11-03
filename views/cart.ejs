@@ -1,0 +1,70 @@
+<%- layout("layout/boilerplate.ejs") %>
+<% let finaltotal=0; %>
+<% if(!user.cart || user.cart.length===0){ %>
+    <p style="margin: 10px 20px;">Your cart is empty!</p>
+        <a href="/" class="btn btn-primary" style="margin: 0px 20px;">
+            Shop Now
+        </a> 
+<% }else{ %>
+        <% for (let item of user.cart) { %>
+            <% finaltotal += item.productId.price * item.quantity; %>
+            <div class="card mb-3 p-3">
+                <div class="d-flex gap-3 align-items-center">
+                    <img src="<%= item.productId.image %>" alt="<%= item.productId.name %>" style="width: 100px; height: 100px; object-fit: cover;">
+                    <div>
+                        <h4><%= item.productId.name %></h4>
+                        <p style="color: green;">Price: $<%= item.productId.price %></p>
+                        <p>Quantity: <%= item.quantity %></p>
+                        <p>Total:<%= item.quantity*item.productId.price  %></p>
+                    </div>
+                    
+                    <div class="d-flex align-items-center gap-2 flex-wrap" style="margin-left: 65%;">
+        
+                        <!-- Decrease quantity -->
+                        <form action="/cart/decrease/<%= item.productId._id %>"
+                              method="post">
+                            <button type="submit"
+                                    class="btn btn-outline-secondary"
+                                    <%= item.quantity <= 1 ? "disabled" : "" %>>
+                                −
+                            </button>
+                        </form>
+                    
+                        <!-- Current quantity -->
+                        <!-- <span class="fw-bold"><%= item.quantity %></span> -->
+                    
+                        <!-- Increase quantity -->
+                        <form action="/cart/increase/<%= item.productId._id %>"
+                              method="post">
+                            <button type="submit" class="btn btn-outline-success">
+                                +
+                            </button>
+                        </form>
+                    
+                        <!-- Remove item -->
+                        <form action="/cart/remove/<%= item.productId._id %>"
+                              method="post">
+                            <button type="submit" class="btn btn-danger">
+                                Remove
+                            </button>
+                        </form>
+                    
+                    </div>
+
+                </div>
+                
+        </div>
+       
+        <%}%>
+        <h4 style="margin: 0 20px;">TotalPrice: $<%= finaltotal %></h4>
+        <a href="/" class="btn btn-primary" style="margin: 0 20px;">
+            Continue Shopping
+        </a>
+        <a href="/order" class="btn btn-warning" style="margin: 0 20px;">
+            Proceed to Buy
+        </a>
+<%}%>
+
+
+<%- include('./partials/footer.ejs') %>
+

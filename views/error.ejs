@@ -1,0 +1,79 @@
+
+<%- layout("layout/boilerplate.ejs") %>
+
+<style>
+    .error-page {
+        min-height: 75vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 15px;
+        background: #f8f9fa;
+    }
+
+    .error-card {
+        width: 100%;
+        max-width: 480px;
+        padding: 40px 30px;
+        text-align: center;
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+        border: 1px solid #eee;
+    }
+
+    .error-icon {
+        width: 85px;
+        height: 85px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 22px;
+        border-radius: 50%;
+        background: #fff0f0;
+        color: #dc3545;
+        font-size: 38px;
+    }
+
+    .error-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #212529;
+        margin-bottom: 12px;
+    }
+
+    .error-message {
+        color: #6c757d;
+        font-size: 1rem;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+        margin-bottom: 25px;
+    }
+
+    .error-home-btn {
+        display: inline-block;
+        padding: 11px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="error-page">
+    <div class="error-card">
+
+        <!-- <div class="error-icon">
+            <i class="bi bi-exclamation-triangle"></i>
+        </div> -->
+
+        <h1 class="error-title">Oops! Something went wrong</h1>
+
+        <p class="error-message"><%= msg %></p>
+
+        <a href="/" class="btn btn-success error-home-btn">
+            <i class="bi bi-house-door me-2"></i>
+            Back to Home
+        </a>
+
+    </div>
+</div>
+<%- include('./partials/footer.ejs') %>

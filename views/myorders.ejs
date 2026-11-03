@@ -1,0 +1,81 @@
+<%- layout("layout/boilerplate.ejs") %>
+
+<div class="bg-light">
+
+    <div class="container py-5">
+
+        <h2 class="mb-4">My Orders</h2>
+
+        <% if (orders.length === 0) { %>
+
+            <div class="alert alert-info">
+                You haven't placed any orders yet.
+            </div>
+
+        <% } else { %>
+
+        <div class="container my-4">
+
+            
+
+            <% orders.map((order) => { %>
+
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                        <p><strong>Order ID:</strong> <%= order.orderId %></p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            <%= order.status %>
+                        </p>
+
+                        <hr>
+
+                        <div class="row fw-bold mb-2">
+                            <div class="col-6">Product</div>
+                            <div class="col-3 text-center">Quantity</div>
+                            <div class="col-3 text-end">Price</div>
+                        </div>
+
+                        <% for (let item of order.items) { %>
+
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <%= item.name %>
+                                </div>
+
+                                <div class="col-3 text-center">
+                                    <%= item.quantity %>
+                                </div>
+
+                                <div class="col-3 text-end">
+                                    ₹<%= item.price %>
+                                </div>
+                            </div>
+
+                        <% } %>
+
+                        <hr>
+
+                        <div class="text-end">
+                            <strong>Total Price: ₹<%= order.totalAmount %></strong>
+                        </div>
+
+                    </div>
+                </div>
+
+            <% }) %>
+
+        </div>
+
+        <% } %>
+
+        <a href="/" class="btn btn-primary">Continue Shopping</a>
+
+    </div>
+
+</div>
+
+
+<%- include('./partials/footer.ejs') %>

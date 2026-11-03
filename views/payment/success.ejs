@@ -1,0 +1,41 @@
+<%- layout("layout/boilerplate.ejs") %>
+
+<div class="container py-5">
+    <div class="card border-0 shadow-sm rounded-4 mx-auto text-center p-4 p-md-5" style="max-width: 550px;">
+
+        
+        <!-- Success Message -->
+        <h2 class="fw-bold text-success mb-2">Payment Successful!</h2>
+        <p class="text-muted mb-4">
+            Thank you for your purchase. Your order has been placed successfully.
+        </p>
+
+        <!-- Order Details -->
+        <div class="bg-light rounded-3 p-3 text-start mb-4">
+            <div class="d-flex justify-content-between mb-3">
+                <span class="text-muted">Order ID</span>
+                <strong><%= order.order_id %></strong>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+                <span class="text-muted">Amount Paid</span>
+                <strong>₹<%= order.order_amount %></strong>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <span class="text-muted">Order Status</span>
+                <span class="badge bg-success"><%= order.order_status %></span>
+            </div>
+        </div>
+
+        <!-- Action Button -->
+        <a href="/" class="btn btn-success btn-lg rounded-pill w-100">
+            <i class="fa-solid fa-bag-shopping me-2"></i>
+            Continue Shopping
+        </a>
+
+        <p class="text-muted small mt-3 mb-0">
+            Need help? Contact our customer support.
+        </p>
+    </div>
+</div>
